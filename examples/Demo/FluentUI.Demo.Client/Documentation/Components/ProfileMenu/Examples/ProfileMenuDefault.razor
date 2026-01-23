@@ -1,0 +1,15 @@
+﻿<FluentStack HorizontalAlignment="@HorizontalAlignment.End"
+			 VerticalAlignment="@VerticalAlignment.Center"
+			 Style="height: 48px; background: var(--neutral-layer-4); padding-inline-end: 10px; ">
+	<FluentProfileMenu Image="@_person.ImageUrl"
+					   Status="@PresenceStatus.Available"
+					   HeaderLabel="@_person.Company"
+					   Initials="@_person.Initials"
+					   FullName="@_person.FullName"
+					   EMail="@_person.Email"
+					   PopoverStyle="min-width: 330px; position: absolute;" />
+</FluentStack>
+
+@code{
+	private People.Person _person = People.GeneratePerson();
+}

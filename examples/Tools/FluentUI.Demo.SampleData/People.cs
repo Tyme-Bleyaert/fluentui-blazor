@@ -79,6 +79,11 @@ public partial class People
         Location: "Redmond");
 
     /// <summary>
+    /// Generates a random person with random data.
+    /// </summary>
+    public static Person GeneratePerson() => GeneratePersons(1).First();
+
+    /// <summary>
     /// Generates a list of persons with random data.
     /// </summary>
     /// <param name="count"></param>
@@ -149,10 +154,15 @@ public partial class People
         /// </summary>
         public int Age => DateTime.Today.Year - BirthDay.Year;
 
+        /// <summary>
+        /// Gets the full name, consisting of the first and last name separated by a space.
+        /// </summary>
+        public string FullName => $"{FirstName} {LastName}";
+
         /// <summary />
         public override string ToString()
         {
-            return $"{Id} - {FirstName} {LastName}";
+            return $"{Id} - {FullName}";
         }
     }
 

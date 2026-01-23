@@ -1,0 +1,80 @@
+﻿@namespace Microsoft.FluentUI.AspNetCore.Components
+@inherits FluentComponentBase
+
+<div id="@Id" class="@ClassValue" style="@StyleValue" top-corner="@TopCorner" tabindex="0"
+     @onclick="@ProfileMenuClickedAsync" @onkeydown="@ProfileMenuKeyDownAsync" >
+    @StartTemplate
+	<FluentStack HorizontalGap="12px"
+				 VerticalAlignment="VerticalAlignment.Center">
+		<FluentAvatar Id="@ProfilePopoverId" Color="AvatarColor.Colorful" Name="@FullName" Size="AvatarSizeButton" Initials="@Initials" Image="@Image">
+			<FluentPresenceBadge Status="@Status" StatusTitle="@StatusTitle" slot="@FluentSlot.Badge" />
+		</FluentAvatar>
+		<FluentStack Orientation="Orientation.Vertical">
+			<FluentText>@FullName</FluentText>
+		</FluentStack>
+	</FluentStack>
+    @EndTemplate
+</div>
+
+<FluentPopover AnchorId="@ProfilePopoverId"
+               Class="@PopoverClass"
+               Style="@PopoverStyle"
+               @bind-Opened="@Open"
+               @bind-Opened:after="@OpenChangedHandlerAsync"
+               @attributes="@AdditionalAttributes">
+    @if (HeaderTemplate is null && (!string.IsNullOrEmpty(HeaderLabel) || !string.IsNullOrEmpty(HeaderButton)))
+    {
+        <FluentStack VerticalAlignment="@VerticalAlignment.Center">
+            @if (!string.IsNullOrEmpty(HeaderLabel))
+            {
+                <FluentLabel part="header-label">@HeaderLabel</FluentLabel>
+            }
+            @if (!string.IsNullOrEmpty(HeaderButton))
+            {
+                <FluentSpacer />
+                <FluentButton part="header-button" Appearance="@ButtonAppearance.Default" OnClick="@OnHeaderButtonClick">@HeaderButton</FluentButton>
+            }
+        </FluentStack>
+    }
+    else
+    {
+        @HeaderTemplate
+    }
+
+    @if (ChildContent is null)
+    {
+        <FluentStack Style="height: 100%;">
+			<FluentAvatar Id="@ProfilePopoverId" Color="AvatarColor.Colorful" Size="AvatarSizeImage" Initials="@Initials" Name="@FullName" Image="@Image">
+				<FluentPresenceBadge Status="@Status" StatusTitle="@StatusTitle" slot="@FluentSlot.Badge" />
+			</FluentAvatar>
+			<FluentStack Orientation="Orientation.Vertical">
+				<FluentText>@FullName</FluentText>
+                <FluentLabel part="fullname" Weight="LabelWeight.Semibold" Size="LabelSize.Medium">@FullName</FluentLabel>
+                <FluentLabel part="email">@EMail</FluentLabel>
+			</FluentStack>
+        </FluentStack>
+    }
+    else
+    {
+        @ChildContent
+    }
+
+    @if (FooterTemplate is null && !string.IsNullOrEmpty(FooterLink))
+    {
+        <FluentStack VerticalAlignment="@VerticalAlignment.Center">
+            @if (!string.IsNullOrEmpty(FooterLabel))
+            {
+                <FluentLabel part="footer-label">@FooterLabel</FluentLabel>
+            }
+            @if (!string.IsNullOrEmpty(FooterLink))
+            {
+                <FluentSpacer />
+                <FluentAnchorButton part="footer-link" Appearance="@ButtonAppearance.Default" Href="@FooterLink">@FooterLinkText</FluentAnchorButton>
+			}
+        </FluentStack>
+    }
+    else
+    {
+        @FooterTemplate
+    }
+</FluentPopover>

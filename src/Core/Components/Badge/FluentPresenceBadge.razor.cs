@@ -41,6 +41,12 @@ public partial class FluentPresenceBadge : FluentComponentBase
     public PresenceStatus? Status { get; set; } = PresenceStatus.Available;
 
     /// <summary>
+    /// Gets or sets the title text to display for the current status.
+    /// </summary>
+    [Parameter]
+    public string? StatusTitle { get; set; }
+
+    /// <summary>
     ///  Gets or sets the out of office state.
     /// </summary>
     [Parameter]

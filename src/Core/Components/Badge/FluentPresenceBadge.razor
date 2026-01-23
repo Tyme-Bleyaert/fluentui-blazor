@@ -14,6 +14,7 @@
 				  size="@Size.ToAttributeValue()"
 				  positioning="@Positioning.ToAttributeValue()"
 				  aria-label="@_ariaLabel"
+				  title="@(StatusTitle ?? _ariaLabel)"
 				  @attributes="@AdditionalAttributes">
 		@if (Icon != null)
 		{
